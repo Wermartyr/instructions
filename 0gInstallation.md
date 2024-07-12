@@ -61,7 +61,7 @@ SEEDS="c4d619f6088cb0b24b4ab43a0510bf9251ab5d7f@54.241.167.190:26656,44d11d4ba92
 sed -i -e "s/^seeds *=.*/seeds = \\"$SEEDS\\"/; s/^persistent_peers *=.*/persistent_peers = \\"$PEERS\\"/" $HOME/.0gchain/config/config.toml
 ```
 
-### Set the config:
+### Set the port pruning and price:
 
 ```bash
 EXTERNAL_IP=$(wget -qO- eth0.me) \\
@@ -72,8 +72,6 @@ API_PORT=1317 \\
 GRPC_PORT=9090 \\
 GRPC_WEB_PORT=9091
 ```
-
-### Set the port pruning and price:
 
 ```bash
 sed -i \\
@@ -140,9 +138,7 @@ Wait a bit until you get the logs. To get out of them press **Cntr+C.**
 
 ```bash
 curl -Ls <https://snapshots.wermartyr.one/snapshots/testnet/zero-gravity/addrbook.json> > $HOME/.0gchain/config/addrbook.json
-```
 
-```bash
 PEERS=$(curl -s --max-time 3 --retry 2 --retry-connrefused "<https://snapshots.Wermartyr.one/snapshots/testnet/zero-gravity/peers.txt>")
 if [ -z "$PEERS" ]; then
     echo "No peers were retrieved from the URL."
@@ -151,9 +147,7 @@ else
     sed -i "s/^persistent_peers *=.*/persistent_peers = "$PEERS"/" "$HOME/.0gchain/config/config.toml"
     echo -e "\\nConfiguration file updated successfully.\\n"
 fi
-```
 
-```bash
 sudo systemctl stop ogd
 cp $HOME/.0gchain/data/priv_validator_state.json $HOME/.0gchain/priv_validator_state.json.backup
 rm -rf $HOME/.0gchain/data
@@ -168,4 +162,4 @@ sudo systemctl restart ogd && sudo journalctl -u ogd -f -o cat
 0gchaind status | jq .sync_info
 ```
 
-If you get **false,** you can install the validator. If it is **true**, you have to wait. You can also compare the height of your node with [Explorer](https://dashboard.nodebrand.xyz/0g-chain).
+If you get **true**, you have to wait. If you get **false**, you can install the validator.
