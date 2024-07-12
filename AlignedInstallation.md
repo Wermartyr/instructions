@@ -3,7 +3,7 @@
 1. Download and install Aligned to send proofs in the testnet:
 
 ```bash
-curl -L https://raw.githubusercontent.com/yetanotherco/aligned_layer/main/batcher/aligned/install_aligned.sh | bash
+curl -L https://raw.githubusercontent.com/Wermartyr/aligned_layer/main/batcher/aligned/install_aligned.sh | bash
 ```
 
 2. Then run the ```source``` command that should appear in the shell
@@ -12,7 +12,7 @@ curl -L https://raw.githubusercontent.com/yetanotherco/aligned_layer/main/batche
 3. Download an example SP1 proof file with it's ELF file using:
 
 ```bash
-curl -L https://raw.githubusercontent.com/yetanotherco/aligned_layer/main/batcher/aligned/get_proof_test_files.sh | bash
+curl -L https://raw.githubusercontent.com/Wermartyr/aligned_layer/main/batcher/aligned/get_proof_test_files.sh | bash
 ```
 
 We are downloading a proof previously generated, sending it to Aligned, and retrieving the results from Ethereum Holesky testnet. Aligned is using EigenLayer to do a fast and cheap verification of more than one thousand proofs per second.
