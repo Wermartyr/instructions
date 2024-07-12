@@ -71,9 +71,8 @@ PPROF_PORT=6060 \\
 API_PORT=1317 \\
 GRPC_PORT=9090 \\
 GRPC_WEB_PORT=9091
-```
 
-```bash
+
 sed -i \\
     -e "s/\\(proxy_app = \\"tcp:\\/\\/\\)\\([^:]*\\):\\([0-9]*\\).*/\\1\\2:$PROXY_APP_PORT\\"/" \\
     -e "s/\\(laddr = \\"tcp:\\/\\/\\)\\([^:]*\\):\\([0-9]*\\).*/\\1\\2:$RPC_PORT\\"/" \\
@@ -81,26 +80,22 @@ sed -i \\
     -e "/\\[p2p\\]/,/^\\[/{s/\\(laddr = \\"tcp:\\/\\/\\)\\([^:]*\\):\\([0-9]*\\).*/\\1\\2:$P2P_PORT\\"/}" \\
     -e "/\\[p2p\\]/,/^\\[/{s/\\(external_address = \\"\\)\\([^:]*\\):\\([0-9]*\\).*/\\1${EXTERNAL_IP}:$P2P_PORT\\"/; t; s/\\(external_address = \\"\\).*/\\1${EXTERNAL_IP}:$P2P_PORT\\"/}" \\
     $HOME/.0gchain/config/config.toml
-```
 
-```bash
+
 sed -i \\
     -e "/\\[api\\]/,/^\\[/{s/\\(address = \\"tcp:\\/\\/\\)\\([^:]*\\):\\([0-9]*\\)\\(\\".*\\)/\\1\\2:$API_PORT\\4/}" \\
     -e "/\\[grpc\\]/,/^\\[/{s/\\(address = \\"\\)\\([^:]*\\):\\([0-9]*\\)\\(\\".*\\)/\\1\\2:$GRPC_PORT\\4/}" \\
     -e "/\\[grpc-web\\]/,/^\\[/{s/\\(address = \\"\\)\\([^:]*\\):\\([0-9]*\\)\\(\\".*\\)/\\1\\2:$GRPC_WEB_PORT\\4/}" $HOME/.0gchain/config/app.toml
-```
 
-```bash
+
 sed -i.bak -e "s/^pruning *=.*/pruning = \\"custom\\"/" $HOME/.0gchain/config/app.toml
 sed -i.bak -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \\"100\\"/" $HOME/.0gchain/config/app.toml
 sed -i.bak -e "s/^pruning-interval *=.*/pruning-interval = \\"10\\"/" $HOME/.0gchain/config/app.toml
-```
 
-```bash
+
 sed -i "s/^minimum-gas-prices *=.*/minimum-gas-prices = \\"0ua0gi\\"/" $HOME/.0gchain/config/app.toml
-```
 
-```bash
+
 sed -i "s/^indexer *=.*/indexer = \\"kv\\"/" $HOME/.0gchain/config/config.toml
 ```
 
